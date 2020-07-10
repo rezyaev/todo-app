@@ -19,7 +19,10 @@
 		"css-loader": "^3.6.0",
 		"eslint": "^7.4.0",
 		"eslint-plugin-react": "^7.20.3",
+		"husky": "^4.2.5",
+		"lint-staged": "^10.2.11",
 		"postcss-loader": "^3.0.0",
+		"prettier": "^2.0.5",
 		"style-loader": "^1.2.1",
 		"ts-loader": "^7.0.5",
 		"typescript": "^3.9.5",
@@ -31,5 +34,14 @@
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"tailwindcss": "^1.4.6"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{ts,tsx}": "eslint --cache --fix",
+		"*.{ts,tsx,css,md}": "prettier --write"
 	}
 }
