@@ -16,6 +16,7 @@
 		"ecmaVersion": 11,
 		"sourceType": "module"
 	},
+	"ignorePatterns": "*.config.js",
 	"plugins": ["react", "@typescript-eslint"],
 	"rules": {
 		"indent": ["error", "tab"],
