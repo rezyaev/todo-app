@@ -19,9 +19,12 @@
 	"ignorePatterns": "*.config.js",
 	"plugins": ["react", "@typescript-eslint"],
 	"rules": {
-		"indent": ["error", "tab"],
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
 		"linebreak-style": ["error", "unix"],
 		"quotes": ["error", "double"],
-		"semi": ["error", "always"]
+		"semi": ["error", "always"],
+		"no-case-declarations": "off",
+		// This rule is redundant, when using TS
+		"react/prop-types": "off"
 	}
 }

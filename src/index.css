@@ -3,3 +3,70 @@
 @tailwind components;
 
 @tailwind utilities;
+
+/* CUSTOM UTILITIES */
+
+.absolute-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* BUTTON COMPONENT */
+
+.btn {
+	@apply py-1 px-3 rounded;
+}
+
+.btn:disabled {
+	@apply opacity-50;
+}
+
+.btn-rounded {
+	@apply p-0 rounded-full;
+}
+
+.btn-primary {
+	@apply bg-red-700 text-white transition-colors duration-150 ease-in-out;
+}
+
+.btn-primary:hover {
+	@apply bg-red-700;
+}
+
+@media (prefers-color-scheme: dark) {
+	.btn-primary {
+		@apply bg-red-600 text-gray-100;
+	}
+}
+
+.btn-tertiary {
+	@apply text-gray-700;
+}
+
+@media (prefers-color-scheme: dark) {
+	.btn-tertiary {
+		@apply text-gray-600;
+	}
+}
+
+/* INPUT COMPONENT */
+
+.input {
+	@apply py-2 px-3 rounded mb-2 bg-gray-400 text-gray-800;
+}
+
+.input::placeholder {
+	@apply text-gray-700;
+}
+
+@media (prefers-color-scheme: dark) {
+	.input {
+		@apply bg-gray-700 text-gray-300;
+	}
+
+	.input::placeholder {
+		@apply text-gray-500;
+	}
+}

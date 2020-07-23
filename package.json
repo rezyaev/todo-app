@@ -11,10 +11,12 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"@tailwindcss/custom-forms": "^0.2.1",
 		"@types/react": "^16.9.35",
 		"@types/react-dom": "^16.9.8",
 		"@typescript-eslint/eslint-plugin": "^3.6.0",
 		"@typescript-eslint/parser": "^3.6.0",
+		"autoprefixer": "^9.8.5",
 		"copy-webpack-plugin": "^6.0.2",
 		"css-loader": "^3.6.0",
 		"eslint": "^7.4.0",
