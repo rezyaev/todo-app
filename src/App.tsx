@@ -1,12 +1,16 @@
 import produce, { Draft } from "immer";
 import { nanoid } from "nanoid";
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import { DeepReadonly } from "ts-essentials";
 
 // APP
 
 export const App: React.FC = () => {
-	const [state, dispatch] = useReducer(update, initialState);
+	const [state, dispatch] = useReducer(update, getInitialState());
+
+	useEffect(() => {
+		localStorage.setItem("state", JSON.stringify(state));
+	}, [state]);
 
 	return (
 		<main className="h-full p-4 flex flex-col justify-between">
@@ -41,12 +45,20 @@ type State = DeepReadonly<{
 	tasks: Table<Task>;
 }>;
 
-const initialState: State = {
-	status: Status.Empty,
-	tasks: {
-		byId: {},
-		allIds: [],
-	},
+const getInitialState = (): State => {
+	const savedState = localStorage.getItem("state");
+
+	if (savedState) {
+		return JSON.parse(savedState) as State;
+	}
+
+	return {
+		status: Status.Empty,
+		tasks: {
+			byId: {},
+			allIds: [],
+		},
+	};
 };
 
 // UPDATE
