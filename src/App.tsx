@@ -16,11 +16,6 @@ export const App: React.FC = () => {
 
 // STATE
 
-interface Table<T> {
-	byId: { [id: string]: T };
-	allIds: string[];
-}
-
 enum Status {
 	Empty,
 	FirstTask,
@@ -32,6 +27,11 @@ interface Task {
 	id: string;
 	title: string;
 	done: boolean;
+}
+
+interface Table<T> {
+	byId: { [id: string]: T };
+	allIds: string[];
 }
 
 type State = DeepReadonly<{
