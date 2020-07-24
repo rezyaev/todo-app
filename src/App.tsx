@@ -9,9 +9,10 @@ export const App: React.FC = () => {
 	const [state, dispatch] = useReducer(update, initialState);
 
 	return (
-		<Layout>
+		<main className="h-full p-4 flex flex-col justify-between">
+			<h1 className="font-bold text-2xl leading-none mb-4">Inbox</h1>
 			<View state={state} dispatch={dispatch}></View>
-		</Layout>
+		</main>
 	);
 };
 
@@ -294,11 +295,4 @@ const AddIcon: React.FC<{ className?: string }> = ({ className }) => (
 			d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"
 		/>
 	</svg>
-);
-
-const Layout: React.FC = ({ children }) => (
-	<main className="h-full p-4 flex flex-col justify-between">
-		<h1 className="font-bold text-2xl leading-none mb-4">Inbox</h1>
-		{children}
-	</main>
 );
