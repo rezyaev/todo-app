@@ -108,7 +108,7 @@ const update = (state: State, action: Action): State => {
 		}
 
 		case ActionType.CancelTaskCreation: {
-			return { ...state, status: Status.Empty };
+			return { ...state, status: tasks.allIds.length === 0 ? Status.Empty : Status.TaskList };
 		}
 
 		case ActionType.DeleteTask: {
