@@ -55,30 +55,12 @@ enum ActionType {
 	DeleteTask,
 }
 
-interface AddTaskAction {
-	type: ActionType.AddTask;
-	payload: Task;
-}
-
-interface UpdateTaskAction {
-	type: ActionType.UpdateTask;
-	payload: {
-		id: Task["id"];
-		task: Task;
-	};
-}
-
-interface DeleteTaskAction {
-	type: ActionType.DeleteTask;
-	payload: string;
-}
-
 type Action =
-	| AddTaskAction
-	| UpdateTaskAction
+	| { type: ActionType.AddTask; payload: Task }
+	| { type: ActionType.UpdateTask; payload: Task }
 	| { type: ActionType.StartTaskCreation }
 	| { type: ActionType.CancelTaskCreation }
-	| DeleteTaskAction;
+	| { type: ActionType.DeleteTask; payload: string };
 
 const update = (state: State, action: Action): State => {
 	const { tasks } = state;
@@ -93,11 +75,11 @@ const update = (state: State, action: Action): State => {
 		}
 
 		case ActionType.UpdateTask: {
-			const { id, task } = action.payload;
+			const task = action.payload;
 			return {
 				...state,
 				tasks: {
-					byId: { ...tasks.byId, [id]: { ...tasks.byId[id], ...task } },
+					byId: { ...tasks.byId, [task.id]: { ...tasks.byId[task.id], ...task } },
 					allIds: tasks.allIds,
 				},
 			};
@@ -255,12 +237,10 @@ const TaskListItem: React.FC<{ task: Task; dispatch: React.Dispatch<Action> }> =
 	dispatch,
 }) => {
 	const { id, title, done } = task;
+
 	const updateTask = (event: React.FormEvent<HTMLLabelElement | HTMLInputElement>) => {
 		event.stopPropagation();
-		return dispatch({
-			type: ActionType.UpdateTask,
-			payload: { id, task: { ...task, done: !done } },
-		});
+		return dispatch({ type: ActionType.UpdateTask, payload: { ...task, done: !done } });
 	};
 
 	return (
