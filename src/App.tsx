@@ -64,42 +64,44 @@ type Action =
 	| { type: ActionType.CancelTaskCreation }
 	| { type: ActionType.DeleteTask; payload: string };
 
-const update = produce((state: Draft<State>, action: Action) => {
-	const { tasks } = state;
+const update = produce(
+	(state: Draft<State>, action: Action): State => {
+		const { tasks } = state;
 
-	switch (action.type) {
-		case ActionType.AddTask: {
-			const task = action.payload;
-			state.status = Status.TaskList;
-			state.tasks.byId[task.id] = task;
-			state.tasks.allIds.push(task.id);
-			break;
-		}
+		switch (action.type) {
+			case ActionType.AddTask: {
+				const task = action.payload;
+				state.status = Status.TaskList;
+				state.tasks.byId[task.id] = task;
+				state.tasks.allIds.push(task.id);
+				return state;
+			}
 
-		case ActionType.UpdateTask: {
-			const task = action.payload;
-			state.tasks.byId[task.id] = task;
-			break;
-		}
+			case ActionType.UpdateTask: {
+				const task = action.payload;
+				state.tasks.byId[task.id] = task;
+				return state;
+			}
 
-		case ActionType.StartTaskCreation: {
-			state.status = tasks.allIds.length === 0 ? Status.FirstTask : Status.NewTask;
-			break;
-		}
+			case ActionType.StartTaskCreation: {
+				state.status = tasks.allIds.length === 0 ? Status.FirstTask : Status.NewTask;
+				return state;
+			}
 
-		case ActionType.CancelTaskCreation: {
-			state.status = tasks.allIds.length === 0 ? Status.Empty : Status.TaskList;
-			break;
-		}
+			case ActionType.CancelTaskCreation: {
+				state.status = tasks.allIds.length === 0 ? Status.Empty : Status.TaskList;
+				return state;
+			}
 
-		case ActionType.DeleteTask: {
-			const id = action.payload;
-			state.tasks.allIds = tasks.allIds.filter((taskId) => taskId !== id);
-			state.status = state.tasks.allIds.length === 0 ? Status.Empty : Status.TaskList;
-			break;
+			case ActionType.DeleteTask: {
+				const id = action.payload;
+				state.tasks.allIds = tasks.allIds.filter((taskId) => taskId !== id);
+				state.status = state.tasks.allIds.length === 0 ? Status.Empty : Status.TaskList;
+				return state;
+			}
 		}
 	}
-});
+);
 
 // VIEW
 
