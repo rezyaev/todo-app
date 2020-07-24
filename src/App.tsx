@@ -1,4 +1,5 @@
 import produce, { Draft } from "immer";
+import { nanoid } from "nanoid";
 import React, { useReducer, useState } from "react";
 import { DeepReadonly } from "ts-essentials";
 
@@ -197,7 +198,7 @@ const TaskCreationForm: React.FC<{ dispatch: React.Dispatch<Action> }> = ({ disp
 					onClick={() =>
 						dispatch({
 							type: ActionType.AddTask,
-							payload: { id: createId(), title: newTaskTitle, done: false },
+							payload: { id: nanoid(), title: newTaskTitle, done: false },
 						})
 					}
 				>
@@ -206,12 +207,6 @@ const TaskCreationForm: React.FC<{ dispatch: React.Dispatch<Action> }> = ({ disp
 			</div>
 		</form>
 	);
-};
-
-let lastId = 0;
-const createId = (): string => {
-	lastId += 1;
-	return lastId.toString();
 };
 
 const TaskList: React.FC<{ tasks: State["tasks"]; dispatch: React.Dispatch<Action> }> = ({
