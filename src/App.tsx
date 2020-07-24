@@ -1,4 +1,6 @@
-import React, { useState, useReducer } from "react";
+import produce, { Draft } from "immer";
+import React, { useReducer, useState } from "react";
+import { DeepReadonly } from "ts-essentials";
 
 // APP
 
@@ -32,10 +34,10 @@ interface Task {
 	done: boolean;
 }
 
-interface State {
+type State = DeepReadonly<{
 	status: Status;
 	tasks: Table<Task>;
-}
+}>;
 
 const initialState: State = {
 	status: Status.Empty,
@@ -62,51 +64,42 @@ type Action =
 	| { type: ActionType.CancelTaskCreation }
 	| { type: ActionType.DeleteTask; payload: string };
 
-const update = (state: State, action: Action): State => {
+const update = produce((state: Draft<State>, action: Action) => {
 	const { tasks } = state;
 
 	switch (action.type) {
 		case ActionType.AddTask: {
 			const task = action.payload;
-			return {
-				status: Status.TaskList,
-				tasks: { byId: { ...tasks.byId, [task.id]: task }, allIds: [...tasks.allIds, task.id] },
-			};
+			state.status = Status.TaskList;
+			state.tasks.byId[task.id] = task;
+			state.tasks.allIds.push(task.id);
+			break;
 		}
 
 		case ActionType.UpdateTask: {
 			const task = action.payload;
-			return {
-				...state,
-				tasks: {
-					byId: { ...tasks.byId, [task.id]: { ...tasks.byId[task.id], ...task } },
-					allIds: tasks.allIds,
-				},
-			};
+			state.tasks.byId[task.id] = task;
+			break;
 		}
 
 		case ActionType.StartTaskCreation: {
-			return { ...state, status: tasks.allIds.length === 0 ? Status.FirstTask : Status.NewTask };
+			state.status = tasks.allIds.length === 0 ? Status.FirstTask : Status.NewTask;
+			break;
 		}
 
 		case ActionType.CancelTaskCreation: {
-			return { ...state, status: tasks.allIds.length === 0 ? Status.Empty : Status.TaskList };
+			state.status = tasks.allIds.length === 0 ? Status.Empty : Status.TaskList;
+			break;
 		}
 
 		case ActionType.DeleteTask: {
 			const id = action.payload;
-			const updatedIds = tasks.allIds.filter((taskId) => taskId !== id);
-
-			return {
-				status: updatedIds.length === 0 ? Status.Empty : Status.TaskList,
-				tasks: { byId: tasks.byId, allIds: updatedIds },
-			};
+			state.tasks.allIds = tasks.allIds.filter((taskId) => taskId !== id);
+			state.status = state.tasks.allIds.length === 0 ? Status.Empty : Status.TaskList;
+			break;
 		}
-
-		default:
-			return state;
 	}
-};
+});
 
 // VIEW
 
