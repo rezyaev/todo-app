@@ -195,6 +195,7 @@ const TaskCreationForm: React.FC<{ dispatch: React.Dispatch<Action> }> = ({ disp
 				placeholder="Buy a new laptop"
 				aria-label="Create a new task"
 				onChange={(event) => setNewTaskTitle(event.target.value)}
+				autoFocus
 			/>
 			<div className="flex justify-between">
 				<button
