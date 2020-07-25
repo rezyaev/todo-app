@@ -19,7 +19,7 @@
 }
 
 .btn-primary {
-	@apply bg-red-700 text-white transition-colors duration-150 ease-in-out;
+	@apply bg-red-600 text-white transition-colors duration-150 ease-in-out;
 }
 
 .btn-primary:hover {
@@ -28,7 +28,7 @@
 
 @media (prefers-color-scheme: dark) {
 	.btn-primary {
-		@apply bg-red-600 text-gray-100;
+		@apply text-gray-100;
 	}
 }
 

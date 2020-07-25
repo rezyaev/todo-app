@@ -174,11 +174,11 @@ const AllClearView: React.FC<{ dispatch: React.Dispatch<Action> }> = ({ dispatch
 const InboxCheckIcon: React.FC<{ className: string }> = ({ className }) => (
 	<svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 		<path
-			className="fill-current dark:text-gray-500"
+			className="fill-current text-gray-600 dark:text-gray-500"
 			d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v10h2a2 2 0 0 1 2 2c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h2V5H5z"
 		/>
 		<path
-			className="fill-current dark:text-gray-500"
+			className="fill-current text-gray-600 dark:text-gray-500"
 			d="M11 11.59l3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42l1.3 1.3z"
 		/>
 	</svg>
@@ -255,7 +255,7 @@ const TaskListItem: React.FC<{ task: Task; dispatch: React.Dispatch<Action> }> =
 				onChange={updateTask}
 			>
 				<input
-					className="form-checkbox text-red-600 border-none dark:bg-gray-700 rounded-full mr-2"
+					className="form-checkbox text-red-600 border-none bg-gray-400 dark:bg-gray-700 rounded-full mr-2"
 					type="checkbox"
 					checked={done}
 					onChange={updateTask}
@@ -279,11 +279,11 @@ const TaskListItem: React.FC<{ task: Task; dispatch: React.Dispatch<Action> }> =
 const TrashIcon: React.FC<{ className?: string }> = ({ className }) => (
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
 		<path
-			className="fill-current dark:text-gray-600"
+			className="fill-current text-gray-500 dark:text-gray-600"
 			d="M5 5h14l-.89 15.12a2 2 0 0 1-2 1.88H7.9a2 2 0 0 1-2-1.88L5 5zm5 5a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1zm4 0a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1z"
 		/>
 		<path
-			className="fill-current dark:text-gray-700"
+			className="fill-current text-gray-600 dark:text-gray-700"
 			d="M8.59 4l1.7-1.7A1 1 0 0 1 11 2h2a1 1 0 0 1 .7.3L15.42 4H19a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2h3.59z"
 		/>
 	</svg>
@@ -302,7 +302,7 @@ const AddTaskButton: React.FC<{ dispatch: React.Dispatch<Action> }> = ({ dispatc
 const AddIcon: React.FC<{ className?: string }> = ({ className }) => (
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
 		<path
-			className="fill-current text-red-200"
+			className="fill-current text-red-100 dark:text-red-200"
 			fillRule="evenodd"
 			d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"
 		/>
