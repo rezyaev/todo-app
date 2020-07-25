@@ -185,7 +185,7 @@ const InboxCheckIcon: React.FC<{ className: string }> = ({ className }) => (
 );
 
 const TaskCreationForm: React.FC<{ dispatch: React.Dispatch<Action> }> = ({ dispatch }) => {
-	const [newTaskTitle, setNewTaskTitle] = useState<string>("");
+	const [taskTitle, setTaskTitle] = useState<string>("");
 
 	return (
 		<form className="mb-8">
@@ -194,7 +194,7 @@ const TaskCreationForm: React.FC<{ dispatch: React.Dispatch<Action> }> = ({ disp
 				type="text"
 				placeholder="Buy a new laptop"
 				aria-label="Create a new task"
-				onChange={(event) => setNewTaskTitle(event.target.value)}
+				onChange={(event) => setTaskTitle(event.target.value)}
 				autoFocus
 			/>
 			<div className="flex justify-between">
@@ -208,11 +208,11 @@ const TaskCreationForm: React.FC<{ dispatch: React.Dispatch<Action> }> = ({ disp
 				<button
 					className="block btn btn-primary"
 					type="submit"
-					disabled={!newTaskTitle}
+					disabled={!taskTitle}
 					onClick={() =>
 						dispatch({
 							type: ActionType.AddTask,
-							payload: { id: nanoid(), title: newTaskTitle, done: false },
+							payload: { id: nanoid(), title: taskTitle, done: false },
 						})
 					}
 				>
