@@ -144,7 +144,7 @@ const View: React.FC<{ state: State; dispatch: React.Dispatch<Action> }> = ({
 			return (
 				<>
 					<TaskList tasks={tasks} dispatch={dispatch} />
-					<AddTaskButton dispatch={dispatch}></AddTaskButton>
+					<AddTaskButton dispatch={dispatch} />
 				</>
 			);
 
